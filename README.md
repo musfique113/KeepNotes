@@ -1,16 +1,8 @@
-# googlekeep
+# Keepnotes
 
-A new Flutter project.
+## Description
+FlutterKeep is a note-taking app built using Flutter that allows users to create, edit, and delete notes. 
 
-## Getting Started
+It utilizes Firebase and SQLite as the back-end for seamless synchronization across devices. Similar to Google Keep, FlutterKeep offers a clean and intuitive interface for users to quickly jot down their thoughts and ideas, set reminders, and organize their notes with labels and colors. 
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+With FlutterKeep, users can access their notes from anywhere and never have to worry about losing their notes again.
