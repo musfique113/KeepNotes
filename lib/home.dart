@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:googlekeep/SideMenuBar.dart';
 import 'package:googlekeep/colors.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
+
   @override
   State<Home> createState() => _HomeState();
+
 }
 
 class _HomeState extends State<Home> {
+
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       key: _drawerKey,
-      drawer: Drawer(),
+      drawer: SideMenu(),
+      endDrawerEnableOpenDragGesture: true,
       backgroundColor: bgColor,
       body: SafeArea(
         child: Container(
