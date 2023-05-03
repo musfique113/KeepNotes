@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:googlekeep/SideMenuBar.dart';
 import 'package:googlekeep/colors.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -25,6 +27,7 @@ class _HomeState extends State<Home> {
       body: SafeArea(
         child: Container(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -88,7 +91,17 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-              )
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                  child: Column(
+                    children: [
+                      Text("ALL", style: TextStyle(color: white.withOpacity(0.5),
+                      fontSize: 14, fontWeight: FontWeight.bold),),
+
+                    ],
+                  )
+              ),
             ],
           ),
         ),
