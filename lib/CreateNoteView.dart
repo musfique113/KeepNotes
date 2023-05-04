@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:googlekeep/colors.dart';
 
-class EditNoteView extends StatefulWidget {
-  const EditNoteView({Key? key}) : super(key: key);
+class CreateNoteView extends StatefulWidget {
+  const CreateNoteView({Key? key}) : super(key: key);
 
   @override
-  State<EditNoteView> createState() => _EditNoteViewState();
+  State<CreateNoteView> createState() => _CreateNoteViewState();
 }
 
-class _EditNoteViewState extends State<EditNoteView> {
+class _CreateNoteViewState extends State<CreateNoteView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +55,7 @@ class _EditNoteViewState extends State<EditNoteView> {
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
-                    hintText: "Notes",
+                    hintText: "New Notes",
                     hintStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.grey.withOpacity(0.8))),

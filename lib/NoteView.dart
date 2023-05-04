@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:googlekeep/EditNoteView.dart';
 import 'package:googlekeep/colors.dart';
 
 class NoteView extends StatefulWidget {
@@ -29,7 +30,9 @@ class _NoteViewState extends State<NoteView> {
               splashRadius: 18,
               icon: Icon(Icons.archive_outlined)),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => EditNoteView()));
+              },
               splashRadius: 18,
               icon: Icon(Icons.edit_outlined))
         ],
