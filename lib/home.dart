@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:googlekeep/SearchPage.dart';
 import 'package:googlekeep/SideMenuBar.dart';
 import 'package:googlekeep/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -22,13 +23,15 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add, size: 35,),
-        onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CreateNoteView()));
-
+        child: Icon(
+          Icons.add,
+          size: 35,
+        ),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CreateNoteView()));
         },
         backgroundColor: cardColor,
-
       ),
       key: _drawerKey,
       drawer: SideMenu(),
@@ -69,22 +72,30 @@ class _HomeState extends State<Home> {
                           SizedBox(
                             width: 16,
                           ),
-                          Container(
-                            height: 55,
-                            width: 200,
-                            // decoration: BoxDecoration(
-                            //     //border: Border.all(color: Colors.white)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Search your Notes",
-                                  style: TextStyle(
-                                      color: white.withOpacity(0.5),
-                                      fontSize: 19),
-                                )
-                              ],
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SearchView()));
+                            },
+                            child: Container(
+                              height: 55,
+                              width: 200,
+                              // decoration: BoxDecoration(
+                              //     //border: Border.all(color: Colors.white)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Search your Notes",
+                                    style: TextStyle(
+                                        color: white.withOpacity(0.5),
+                                        fontSize: 19),
+                                  )
+                                ],
+                              ),
                             ),
                           )
                         ],
@@ -202,7 +213,10 @@ class _HomeState extends State<Home> {
                 staggeredTileBuilder: (index) => StaggeredTile.fit(2),
                 itemBuilder: (context, index) => InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NoteView()));
                       },
                       child: Container(
                         padding: EdgeInsets.all(10),
@@ -263,38 +277,41 @@ class _HomeState extends State<Home> {
                 shrinkWrap: true,
                 itemCount: 10,
                 itemBuilder: (context, index) => InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: white.withOpacity(0.4)),
-                        borderRadius: BorderRadius.circular(7)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("HEADING",
-                            style: TextStyle(
-                                color: white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold)),
-                        SizedBox(
-                          height: 10,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NoteView()));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: white.withOpacity(0.4)),
+                            borderRadius: BorderRadius.circular(7)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("HEADING",
+                                style: TextStyle(
+                                    color: white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold)),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              index.isEven
+                                  ? note.length > 250
+                                      ? "${note.substring(0, 250)}..."
+                                      : note
+                                  : note1,
+                              style: TextStyle(color: white),
+                            ),
+                          ],
                         ),
-                        Text(
-                          index.isEven
-                              ? note.length > 250
-                              ? "${note.substring(0, 250)}..."
-                              : note
-                              : note1,
-                          style: TextStyle(color: white),
-                        ),
-                      ],
-                    ),
-                  ),
-                ))),
+                      ),
+                    ))),
         //SizedBox(height: 10,)
       ],
     );
