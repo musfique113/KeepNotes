@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:googlekeep/ArchiveView.dart';
 import 'package:googlekeep/Setting.dart';
 import 'package:googlekeep/colors.dart';
 
@@ -99,7 +100,9 @@ class _SideMenuState extends State<SideMenu> {
               )
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ArchiveView()));
+        },
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
           child: Row(

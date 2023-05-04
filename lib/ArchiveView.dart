@@ -79,7 +79,7 @@ class _ArchiveViewState extends State<ArchiveView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Search your Notes",
+                                  "Search your Archived Notes",
                                   style: TextStyle(
                                       color: white.withOpacity(0.5),
                                       fontSize: 19),
