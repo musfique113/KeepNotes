@@ -12,6 +12,7 @@ class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: bgColor,
       child: SafeArea(
         child: Container(
           decoration: BoxDecoration(color: bgColor),

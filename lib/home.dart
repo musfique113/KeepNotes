@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:googlekeep/SideMenuBar.dart';
 import 'package:googlekeep/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:googlekeep/NoteView.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -191,7 +192,7 @@ class _HomeState extends State<Home> {
                 staggeredTileBuilder: (index) => StaggeredTile.fit(2),
                 itemBuilder: (context, index) => InkWell(
                       onTap: () {
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
                       },
                       child: Container(
                         padding: EdgeInsets.all(10),
@@ -253,9 +254,10 @@ class _HomeState extends State<Home> {
                 itemCount: 10,
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    //Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
                   },
                   child: Container(
+                    margin: EdgeInsets.only(bottom: 10),
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         border: Border.all(color: white.withOpacity(0.4)),
@@ -278,11 +280,12 @@ class _HomeState extends State<Home> {
                               : note
                               : note1,
                           style: TextStyle(color: white),
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ))),
+        //SizedBox(height: 10,)
       ],
     );
   }
