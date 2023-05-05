@@ -6,6 +6,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:googlekeep/NoteView.dart';
 import 'package:googlekeep/CreateNoteView.dart';
 import 'package:googlekeep/services/db.dart';
+import 'package:sqflite/sqflite.dart';
 
 
 class Home extends StatefulWidget {
@@ -26,9 +27,10 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     createEntry();
-   // getAllNotes();
-    getOneNote();
-    updatedNote();
+    getAllNotes();
+    //getOneNote();
+    deleteNotes();
+    //updatedNote();
   }
 
   Future createEntry() async {
@@ -44,6 +46,10 @@ class _HomeState extends State<Home> {
 
   Future<String?> updatedNote() async{
     await NotesDatabase.instance.updateNote(4);
+  }
+
+  Future<String?> deleteNotes() async{
+    await NotesDatabase.instance.deleteNotes(5);
   }
 
   @override
