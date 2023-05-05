@@ -5,6 +5,8 @@ import 'package:googlekeep/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:googlekeep/NoteView.dart';
 import 'package:googlekeep/CreateNoteView.dart';
+import 'package:googlekeep/services/db.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,6 +20,26 @@ class _HomeState extends State<Home> {
   String note =
       "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE";
   String note1 = "THIS IS NOTE THIS IS NOTE THIS IS NOTE";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    createEntry();
+    //getAllNotes();
+    getOneNote();
+  }
+
+  Future createEntry() async {
+    await NotesDatabase.instance.InsertEntry();
+  }
+  Future<String?> getAllNotes() async{
+    await NotesDatabase.instance.readAllNotes();
+  }
+
+  Future<String?> getOneNote() async{
+    await NotesDatabase.instance.readOneNote(2);
+  }
 
   @override
   Widget build(BuildContext context) {
