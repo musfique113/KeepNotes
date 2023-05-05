@@ -42,19 +42,25 @@ class NotesDatabase {
     });
     return true;
   }
-  Future<String> readAllNotes() async{
+  Future readAllNotes() async{
     final db = await instance.database;
     final orderBy ='createdTime ASC';
     final query_result = await db!.query("Notes", orderBy: orderBy);
     print(query_result);
     return "SUCESSFULL";
   }
-  Future<String?> readOneNote(int id) async{
+  Future readOneNote(int id) async{
     final db = await instance.database;
     final map = await db!.query("Notes", columns: ["title"],
     where: 'id = ?',
         whereArgs: [id]
     );
     print(map);
+  }
+
+  Future updateNote(int id) async{
+    final db = await instance.database;
+    await db!.update("Notes", {"title" :"This is a updated data dfsdfdszfsdfs 0025" },where:"id = ?", whereArgs: [id] );
+    //print(updateNote(id))
   }
 }

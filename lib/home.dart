@@ -26,8 +26,9 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     createEntry();
-    //getAllNotes();
+   // getAllNotes();
     getOneNote();
+    updatedNote();
   }
 
   Future createEntry() async {
@@ -38,7 +39,11 @@ class _HomeState extends State<Home> {
   }
 
   Future<String?> getOneNote() async{
-    await NotesDatabase.instance.readOneNote(2);
+    await NotesDatabase.instance.readOneNote(4);
+  }
+
+  Future<String?> updatedNote() async{
+    await NotesDatabase.instance.updateNote(4);
   }
 
   @override
