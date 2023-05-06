@@ -20,9 +20,6 @@ class _HomeState extends State<Home> {
   bool isLoading = true;
   late List<Note> notesList;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-  String note =
-      "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE";
-  String note1 = "THIS IS NOTE THIS IS NOTE THIS IS NOTE";
 
   @override
   void initState() {
@@ -31,7 +28,7 @@ class _HomeState extends State<Home> {
     createEntry(Note(
         pin: false,
         title: "Test Titel",
-        content: "test contnte $note1",
+        content: "test contnte ",
         createdTime: DateTime.now()));
     getAllNotes();
   }
@@ -227,7 +224,7 @@ class _HomeState extends State<Home> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => NoteView()));
+                                builder: (context) => NoteView(note: notesList[index],)));
                       },
                       child: Container(
                         padding: EdgeInsets.all(10),

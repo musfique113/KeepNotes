@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:googlekeep/EditNoteView.dart';
 import 'package:googlekeep/colors.dart';
+import 'package:googlekeep/model/MyNoteModel.dart';
 
 class NoteView extends StatefulWidget {
-  const NoteView({Key? key}) : super(key: key);
+  Note note;
+  NoteView ({required this.note});
 
   @override
   State<NoteView> createState() => _NoteViewState();
 }
 
 class _NoteViewState extends State<NoteView> {
-  String note =
-      "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE";
-  String note1 = "THIS IS NOTE THIS IS NOTE THIS IS NOTE";
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,9 +43,9 @@ class _NoteViewState extends State<NoteView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Heading",style: TextStyle(color: Colors.white,fontSize: 23,fontWeight: FontWeight.bold),),
+            Text(widget.note.title ,style: TextStyle(color: Colors.white,fontSize: 23,fontWeight: FontWeight.bold),),
             SizedBox(height: 10,),
-            Text(note,style: TextStyle(color: Colors.white),),
+            Text(widget.note.content,style: TextStyle(color: Colors.white),),
           ],
         )
       ),

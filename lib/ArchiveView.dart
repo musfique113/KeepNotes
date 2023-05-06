@@ -1,9 +1,13 @@
+import 'dart:ui';
+import 'package:googlekeep/model/MyNoteModel.dart';
+import 'package:googlekeep/services/db.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'SearchPage.dart';
+import 'package:googlekeep/CreateNoteView.dart';
+import 'NoteView.dart';
 import 'package:flutter/material.dart';
 import 'package:googlekeep/SideMenuBar.dart';
 import 'package:googlekeep/colors.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:googlekeep/NoteView.dart';
-import 'package:googlekeep/CreateNoteView.dart';
 
 class ArchiveView extends StatefulWidget {
   const ArchiveView({Key? key}) : super(key: key);
@@ -13,10 +17,9 @@ class ArchiveView extends StatefulWidget {
 }
 
 class _ArchiveViewState extends State<ArchiveView> {
+  String note = "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS ";
+  String note1 = "1111 THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS ";
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-  String note =
-      "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE";
-  String note1 = "THIS IS NOTE THIS IS NOTE THIS IS NOTE";
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +205,7 @@ class _ArchiveViewState extends State<ArchiveView> {
                 staggeredTileBuilder: (index) => StaggeredTile.fit(2),
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
+                    //Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView(note: notesList[index],)));
                   },
                   child: Container(
                     padding: EdgeInsets.all(10),
@@ -264,7 +267,7 @@ class _ArchiveViewState extends State<ArchiveView> {
                 itemCount: 10,
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
+                    //Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView(note: note,)));
                   },
                   child: Container(
                     margin: EdgeInsets.only(bottom: 10),
