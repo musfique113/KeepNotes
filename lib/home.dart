@@ -8,6 +8,8 @@ import 'package:googlekeep/CreateNoteView.dart';
 import 'package:googlekeep/services/db.dart';
 import 'package:sqflite/sqflite.dart';
 
+import 'model/MyNoteModel.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -26,30 +28,30 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    createEntry();
-    getAllNotes();
+    //createEntry();
+    //getAllNotes();
     //getOneNote();
-    deleteNotes();
+    //deleteNotes();
     //updatedNote();
   }
 
-  Future createEntry() async {
-    await NotesDatabase.instance.InsertEntry();
+  Future createEntry(Note note) async {
+    await NotesDatabase.instance.InsertEntry(note);
   }
   Future<String?> getAllNotes() async{
     await NotesDatabase.instance.readAllNotes();
   }
 
-  Future<String?> getOneNote() async{
-    await NotesDatabase.instance.readOneNote(4);
+  Future<String?> getOneNote(int id) async{
+    await NotesDatabase.instance.readOneNote(id);
   }
 
-  Future<String?> updatedNote() async{
-    await NotesDatabase.instance.updateNote(4);
+  Future<String?> updatedNote(Note note) async{
+    await NotesDatabase.instance.updateNote(note);
   }
 
-  Future<String?> deleteNotes() async{
-    await NotesDatabase.instance.deleteNotes(5);
+  Future<String?> deleteNotes(Note note) async{
+    await NotesDatabase.instance.delteNotes(note);
   }
 
   @override
