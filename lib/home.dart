@@ -1,24 +1,24 @@
+import 'dart:ui';
+import 'package:googlekeep/model/MyNoteModel.dart';
+import 'package:googlekeep/services/db.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'SearchPage.dart';
+import 'package:googlekeep/CreateNoteView.dart';
+import 'NoteView.dart';
 import 'package:flutter/material.dart';
-import 'package:googlekeep/SearchPage.dart';
 import 'package:googlekeep/SideMenuBar.dart';
 import 'package:googlekeep/colors.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:googlekeep/NoteView.dart';
-import 'package:googlekeep/CreateNoteView.dart';
-import 'package:googlekeep/services/db.dart';
-import 'package:sqflite/sqflite.dart';
-
-import 'model/MyNoteModel.dart';
-
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  bool isLoading = true;
+  late List<Note> notesList;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   String note =
       "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE";
@@ -28,211 +28,187 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //createEntry();
-    //getAllNotes();
-    //getOneNote();
-    //deleteNotes();
-    //updatedNote();
+    createEntry(Note(
+        pin: false,
+        title: "Test Titel",
+        content: "test contnte $note1",
+        createdTime: DateTime.now()));
+    getAllNotes();
   }
 
   Future createEntry(Note note) async {
-    await NotesDatabase.instance.InsertEntry(note);
-  }
-  Future<String?> getAllNotes() async{
-    await NotesDatabase.instance.readAllNotes();
+    await NotesDatabse.instance.InsertEntry(note);
   }
 
-  Future<String?> getOneNote(int id) async{
-    await NotesDatabase.instance.readOneNote(id);
+  Future getAllNotes() async {
+    this.notesList = await NotesDatabse.instance.readAllNotes();
+    setState(() {
+      isLoading = false;
+    });
   }
 
-  Future<String?> updatedNote(Note note) async{
-    await NotesDatabase.instance.updateNote(note);
+  Future getOneNote(int id) async {
+    await NotesDatabse.instance.readOneNote(id);
   }
 
-  Future<String?> deleteNotes(Note note) async{
-    await NotesDatabase.instance.delteNotes(note);
+  Future updateOneNote(Note note) async {
+    await NotesDatabse.instance.updateNote(note);
+  }
+
+  Future deleteNote(Note note) async {
+    await NotesDatabse.instance.delteNote(note);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          size: 35,
-        ),
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateNoteView()));
-        },
-        backgroundColor: cardColor,
-      ),
-      key: _drawerKey,
-      drawer: SideMenu(),
-      endDrawerEnableOpenDragGesture: true,
-      backgroundColor: bgColor,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  width: MediaQuery.of(context).size.width,
-                  height: 55,
-                  decoration: BoxDecoration(
-                      color: cardColor,
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                            color: black.withOpacity(0.2),
-                            spreadRadius: 2,
-                            blurRadius: 3),
-                      ]),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              _drawerKey.currentState!.openDrawer();
-                            },
-                            icon: Icon(Icons.menu),
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SearchView()));
-                            },
-                            child: Container(
-                              height: 55,
-                              width: 200,
-                              // decoration: BoxDecoration(
-                              //     //border: Border.all(color: Colors.white)),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+    return isLoading
+        ? Scaffold(
+            backgroundColor: bgColor,
+            body: Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            ),
+          )
+        : Scaffold(
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CreateNoteView()));
+              },
+              backgroundColor: cardColor,
+              child: Icon(
+                Icons.add,
+                size: 45,
+              ),
+            ),
+            endDrawerEnableOpenDragGesture: true,
+            key: _drawerKey,
+            drawer: SideMenu(),
+            backgroundColor: bgColor,
+            body: SafeArea(
+                child: SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        width: MediaQuery.of(context).size.width,
+                        height: 55,
+                        decoration: BoxDecoration(
+                            color: cardColor,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 3)
+                            ]),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
                                 children: [
-                                  Text(
-                                    "Search your Notes",
-                                    style: TextStyle(
-                                        color: white.withOpacity(0.5),
-                                        fontSize: 19),
+                                  IconButton(
+                                      onPressed: () {
+                                        _drawerKey.currentState!.openDrawer();
+                                      },
+                                      icon: Icon(
+                                        Icons.menu,
+                                        color: white,
+                                      )),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SearchView()));
+                                    },
+                                    child: Container(
+                                        height: 55,
+                                        width: 200,
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Search Your Notes",
+                                                style: TextStyle(
+                                                    color:
+                                                        white.withOpacity(0.5),
+                                                    fontSize: 16),
+                                              )
+                                            ])),
                                   )
                                 ],
                               ),
-                            ),
-                          )
-                        ],
-                      ),
-                      // row two
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 7),
-                        child: Row(
-                          children: [
-                            TextButton(
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.grid_view,
-                                  color: white,
-                                )),
-                            CircleAvatar(
-                              radius: 15,
-                              backgroundColor: Colors.orange,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  children: [
+                                    TextButton(
+                                        style: ButtonStyle(
+                                            overlayColor:
+                                                MaterialStateColor.resolveWith(
+                                                    (states) =>
+                                                        white.withOpacity(0.1)),
+                                            shape: MaterialStateProperty.all<
+                                                    RoundedRectangleBorder>(
+                                                RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(50.0),
+                                            ))),
+                                        onPressed: () {},
+                                        child: Icon(
+                                          Icons.grid_view,
+                                          color: white,
+                                        )),
+                                    SizedBox(
+                                      width: 9,
+                                    ),
+                                    CircleAvatar(
+                                      radius: 16,
+                                      backgroundColor: Colors.white,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ])),
+                    NoteSectionAll(),
+                    //NotesListSection()
+                  ],
                 ),
-                NoteSectionAll(),
-                NotesListSection(),
-
-                // Container(
-                //     padding: EdgeInsets.symmetric(
-                //       horizontal: 10,
-                //       vertical: 15,
-                //     ),
-                //     child: StaggeredGridView.countBuilder(
-                //         physics: NeverScrollableScrollPhysics(),
-                //         shrinkWrap: true,
-                //         itemCount: 10,
-                //         mainAxisSpacing: 12,
-                //         crossAxisSpacing: 12,
-                //         crossAxisCount: 4,
-                //         staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-                //         itemBuilder: (context, index) => InkWell(
-                //           onTap: () {
-                //             //Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
-                //           },
-                //           child: Container(
-                //             padding: EdgeInsets.all(10),
-                //             decoration: BoxDecoration(
-                //               color: index.isEven ? Colors.green[900] : Colors.blue[900],
-                //                 border:
-                //                 Border.all(color:index.isEven ? Colors.green.withOpacity(0.4) : Colors.blue.withOpacity(0.4)),
-                //                 borderRadius: BorderRadius.circular(7)),
-                //             child: Column(
-                //               crossAxisAlignment: CrossAxisAlignment.start,
-                //               children: [
-                //                 Text("HEADING",
-                //                     style: TextStyle(
-                //                         color: white,
-                //                         fontSize: 20,
-                //                         fontWeight: FontWeight.bold)),
-                //                 SizedBox(
-                //                   height: 10,
-                //                 ),
-                //                 Text(
-                //                   index.isEven
-                //                       ? note.length > 250
-                //                       ? "${note.substring(0, 250)}..."
-                //                       : note
-                //                       : note1,
-                //                   style: TextStyle(color: white),
-                //                 )
-                //               ],
-                //             ),
-                //           ),
-                //         )
-                //     )
-                // ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+              ),
+            )));
   }
 
   Widget NoteSectionAll() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+        child: Column(
       children: [
         Container(
-            margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-            child: Column(
-              children: [
-                Text(
-                  "ALL",
-                  style: TextStyle(
-                      color: white.withOpacity(0.5),
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            )),
+          margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "ALL",
+                style: TextStyle(
+                    color: white.withOpacity(0.5),
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
         Container(
             padding: EdgeInsets.symmetric(
               horizontal: 10,
@@ -241,7 +217,7 @@ class _HomeState extends State<Home> {
             child: StaggeredGridView.countBuilder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 10,
+                itemCount: notesList.length,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
                 crossAxisCount: 4,
@@ -261,7 +237,7 @@ class _HomeState extends State<Home> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("HEADING",
+                            Text(notesList[index].title,
                                 style: TextStyle(
                                     color: white,
                                     fontSize: 20,
@@ -270,11 +246,9 @@ class _HomeState extends State<Home> {
                               height: 10,
                             ),
                             Text(
-                              index.isEven
-                                  ? note.length > 250
-                                      ? "${note.substring(0, 250)}..."
-                                      : note
-                                  : note1,
+                              notesList[index].content.length > 250
+                                  ? "${notesList[index].content.substring(0, 250)}..."
+                                  : notesList[index].content,
                               style: TextStyle(color: white),
                             )
                           ],
@@ -282,73 +256,67 @@ class _HomeState extends State<Home> {
                       ),
                     ))),
       ],
-    );
+    ));
   }
 
-  Widget NotesListSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-            margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-            child: Column(
-              children: [
-                Text(
-                  "List View",
-                  style: TextStyle(
-                      color: white.withOpacity(0.5),
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            )),
-        Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 15,
-            ),
-            child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 10,
-                itemBuilder: (context, index) => InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NoteView()));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(bottom: 10),
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: white.withOpacity(0.4)),
-                            borderRadius: BorderRadius.circular(7)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("HEADING",
-                                style: TextStyle(
-                                    color: white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold)),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              index.isEven
-                                  ? note.length > 250
-                                      ? "${note.substring(0, 250)}..."
-                                      : note
-                                  : note1,
-                              style: TextStyle(color: white),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ))),
-        //SizedBox(height: 10,)
-      ],
-    );
-  }
+  // Widget NotesListSection() {
+  //   return Container(
+  //       child: Column(
+  //     children: [
+  //       Container(
+  //         margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+  //         child: Row(
+  //           mainAxisAlignment: MainAxisAlignment.start,
+  //           children: [
+  //             Text(
+  //               "LIST VIEW",
+  //               style: TextStyle(
+  //                   color: white.withOpacity(0.5),
+  //                   fontSize: 13,
+  //                   fontWeight: FontWeight.bold),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //       Container(
+  //           padding: EdgeInsets.symmetric(
+  //             horizontal: 10,
+  //             vertical: 15,
+  //           ),
+  //           child: ListView.builder(
+  //             physics: NeverScrollableScrollPhysics(),
+  //             shrinkWrap: true,
+  //             itemCount: 10,
+  //             itemBuilder: (context, index) => Container(
+  //               padding: EdgeInsets.all(10),
+  //               margin: EdgeInsets.only(bottom: 10),
+  //               decoration: BoxDecoration(
+  //                   border: Border.all(color: white.withOpacity(0.4)),
+  //                   borderRadius: BorderRadius.circular(7)),
+  //               child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Text("HEADING",
+  //                       style: TextStyle(
+  //                           color: white,
+  //                           fontSize: 20,
+  //                           fontWeight: FontWeight.bold)),
+  //                   SizedBox(
+  //                     height: 10,
+  //                   ),
+  //                   Text(
+  //                     index.isEven
+  //                         ? note.length > 250
+  //                             ? "${note.substring(0, 250)}..."
+  //                             : note
+  //                         : note1,
+  //                     style: TextStyle(color: white),
+  //                   )
+  //                 ],
+  //               ),
+  //             ),
+  //           )),
+  //     ],
+  //   ));
+  // }
 }

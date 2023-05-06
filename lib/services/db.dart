@@ -3,11 +3,11 @@ import 'package:path/path.dart';
 
 import '../model/MyNoteModel.dart';
 
-class NotesDatabase {
-  static final NotesDatabase instance = NotesDatabase._init();
+class NotesDatabse {
+  static final NotesDatabse instance = NotesDatabse._init();
   static Database? _database;
 
-  NotesDatabase._init();
+  NotesDatabse._init();
 
   Future<Database?> get database async {
     if (_database != null) return _database;
@@ -18,25 +18,21 @@ class NotesDatabase {
   Future<Database> _initializeDB(String filepath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filepath);
+
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
   Future _createDB(Database db, int version) async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    final boolType = 'BOOLEAN NOT NULL';
+    final boolType = ' BOOLEAN NOT NULL';
     final textType = 'TEXT NOT NULL';
     await db.execute('''
-    CREATE TABLE Notes (
-    ${NotesImpNames.id} $idType,
-    ${NotesImpNames.pin} $boolType,
-    ${NotesImpNames.title} $textType,
-    ${NotesImpNames.content} $textType,
-    ${NotesImpNames.createdTime} $textType,
-      // id INTEGER PRIMARY KEY AUTOINCREMENT,
-      // pin BOOLEAN NOT NULL,
-      // title TEXT NOT NULL,
-      // content TEXT NOT NULL,
-      // createdTime TEXT NOT NULL
+    CREATE TABLE Notes(
+      ${NotesImpNames.id} $idType,
+      ${NotesImpNames.pin} $boolType,
+      ${NotesImpNames.title} $textType,
+      ${NotesImpNames.content} $textType,
+      ${NotesImpNames.createdTime} $textType
     )
     ''');
   }
@@ -46,17 +42,6 @@ class NotesDatabase {
     final id = await db!.insert(NotesImpNames.TableName, note.toJson());
     return note.copy(id: id);
   }
-
-  // Future<bool?> InsertEntry() async {
-  //   final db = await instance.database;
-  //   await db!.insert("Notes", {
-  //     "pin": 0,
-  //     "title": "This is my title DB",
-  //     "content": "This is my notes content DB",
-  //     "createdTime": "26 Jan 2022"
-  //   });
-  //   return true;
-  // }
 
   Future<List<Note>> readAllNotes() async {
     final db = await instance.database;
@@ -70,29 +55,30 @@ class NotesDatabase {
     final db = await instance.database;
     final map = await db!.query(NotesImpNames.TableName,
         columns: NotesImpNames.values,
-        where: '${NotesImpNames.id}= ?',
+        where: '${NotesImpNames.id} = ?',
         whereArgs: [id]);
     if (map.isNotEmpty) {
       return Note.fromJson(map.first);
     } else {
       return null;
     }
-    //print(map);
   }
 
   Future updateNote(Note note) async {
     final db = await instance.database;
+
     await db!.update(NotesImpNames.TableName, note.toJson(),
         where: '${NotesImpNames.id} = ?', whereArgs: [note.id]);
   }
 
-  Future delteNotes(Note note) async {
+  Future delteNote(Note note) async {
     final db = await instance.database;
+
     await db!.delete(NotesImpNames.TableName,
         where: '${NotesImpNames.id}= ?', whereArgs: [note.id]);
   }
 
-  Future clsoeDB() async{
+  Future closeDB() async {
     final db = await instance.database;
     db!.close();
   }
