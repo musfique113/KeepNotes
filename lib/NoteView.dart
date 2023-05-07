@@ -15,6 +15,12 @@ class NoteView extends StatefulWidget {
 
 class _NoteViewState extends State<NoteView> {
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    print(widget.note!.pin);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +32,17 @@ class _NoteViewState extends State<NoteView> {
         actions: [
           //pin
           IconButton(
-              onPressed: () {},
+              onPressed: () async{
+                await NotesDatabse.instance.pinNote(widget.note);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+              },
               splashRadius: 18,
-              icon: Icon(Icons.push_pin_outlined)),
+              icon: Icon(widget.note!.pin ? Icons.push_pin : Icons.push_pin_outlined)),
           //archived
           IconButton(
-              onPressed: () {},
+              onPressed: () async{
+
+              },
               splashRadius: 18,
               icon: Icon(Icons.archive_outlined)),
           //edit

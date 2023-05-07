@@ -25,11 +25,11 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    createEntry(Note(
-        pin: false,
-        title: "Test Titel",
-        content: "test contnte ",
-        createdTime: DateTime.now()));
+    // createEntry(Note(
+    //     pin: false,
+    //     title: "Test Titel",
+    //     content: "test contnte ",
+    //     createdTime: DateTime.now()));
     getAllNotes();
   }
 
