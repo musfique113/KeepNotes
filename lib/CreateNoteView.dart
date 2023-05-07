@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:googlekeep/colors.dart';
+import 'package:googlekeep/home.dart';
+import 'package:googlekeep/services/db.dart';
+
+import 'model/MyNoteModel.dart';
 
 class CreateNoteView extends StatefulWidget {
   const CreateNoteView({Key? key}) : super(key: key);
@@ -9,6 +13,15 @@ class CreateNoteView extends StatefulWidget {
 }
 
 class _CreateNoteViewState extends State<CreateNoteView> {
+  TextEditingController title = new TextEditingController();
+  TextEditingController content = new TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    title.dispose();
+    content.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +31,10 @@ class _CreateNoteViewState extends State<CreateNoteView> {
         elevation: 0.0,
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () async{
+                await NotesDatabse.instance.InsertEntry(Note(title: title.text,content: content.text,pin: false,createdTime: DateTime.now()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+              },
               splashRadius: 17,
               icon: Icon(Icons.save_outlined))
         ],
@@ -29,6 +45,7 @@ class _CreateNoteViewState extends State<CreateNoteView> {
           children: [
             TextField(
               cursorColor: white,
+              controller: title,
               style: TextStyle(fontSize: 25, color: Colors.white),
               decoration: InputDecoration(
                   border: InputBorder.none,
@@ -48,6 +65,7 @@ class _CreateNoteViewState extends State<CreateNoteView> {
                 minLines: 50,
                 maxLines: null,
                 cursorColor: white,
+                controller: content,
                 style: TextStyle(fontSize: 17, color: Colors.white),
                 decoration: InputDecoration(
                     border: InputBorder.none,

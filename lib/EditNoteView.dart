@@ -3,6 +3,7 @@ import 'package:googlekeep/NoteView.dart';
 import 'package:googlekeep/colors.dart';
 import 'package:googlekeep/services/db.dart';
 
+import 'home.dart';
 import 'model/MyNoteModel.dart';
 
 class EditNoteView extends StatefulWidget {
@@ -34,9 +35,10 @@ class _EditNoteViewState extends State<EditNoteView> {
         actions: [
           IconButton(
               onPressed: () async{
-                Note newNote = Note(content: newNoteDetails , title: newTitle , createdTime:  widget.note.createdTime, pin: false , id: widget.note.id);
+                Note newNote = Note(content: newNoteDetails , title: newTitle , createdTime:  widget.note!.createdTime, pin: false , id: widget.note!.id);
                 await NotesDatabse.instance.updateNote(newNote);
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>NoteView(note: newNote,)));
+                //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>NoteView(note: newNote,)));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Home()));
               },
               splashRadius: 17,
               icon: Icon(Icons.save_outlined))
