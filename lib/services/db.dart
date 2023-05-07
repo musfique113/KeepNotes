@@ -1,3 +1,4 @@
+import 'package:googlekeep/services/firestore_db.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -39,6 +40,7 @@ class NotesDatabse {
   }
 
   Future<Note?> InsertEntry(Note note) async {
+    await FireDB().createNewNoteFirestore(note);
     final db = await instance.database;
     final id = await db!.insert(NotesImpNames.TableName, note.toJson());
     return note.copy(id: id);
@@ -77,16 +79,17 @@ class NotesDatabse {
   }
 
   Future updateNote(Note note) async {
+    await FireDB().updateNoteFirestore(note);
     final db = await instance.database;
     await db!.update(NotesImpNames.TableName, note.toJson(),
         where: '${NotesImpNames.id} = ?', whereArgs: [note.id]);
   }
 
   Future delteNote(Note? note) async {
+    await FireDB().deleteNoteFirestore(note!);
     final db = await instance.database;
-
     await db!.delete(NotesImpNames.TableName,
-        where: '${NotesImpNames.id}= ?', whereArgs: [note!.id]);
+        where: '${NotesImpNames.id}= ?', whereArgs: [note.id]);
   }
 
   Future<List<int>> getNoteString(String query) async {
