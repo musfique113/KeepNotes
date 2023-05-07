@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: isLogIn ? Home() : Login(),
+      home: isLogIn ? Login() : Home(),
     );
   }
 }
