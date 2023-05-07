@@ -118,7 +118,7 @@ class _HomeState extends State<Home> {
                                         color: white,
                                       )),
                                   SizedBox(
-                                    width: 16,
+                                    width: 7,
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -170,7 +170,7 @@ class _HomeState extends State<Home> {
                                           color: white,
                                         )),
                                     SizedBox(
-                                      width: 9,
+                                      width: 1,
                                     ),
                                     CircleAvatar(
                                       radius: 16,

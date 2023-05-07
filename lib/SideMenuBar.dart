@@ -3,6 +3,8 @@ import 'package:googlekeep/ArchiveView.dart';
 import 'package:googlekeep/Setting.dart';
 import 'package:googlekeep/colors.dart';
 
+import 'home.dart';
+
 class SideMenu extends StatefulWidget {
   const SideMenu({Key? key}) : super(key: key);
 
@@ -60,7 +62,9 @@ class _SideMenuState extends State<SideMenu> {
               )
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+        },
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
           child: Row(

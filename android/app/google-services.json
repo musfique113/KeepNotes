@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "453552072603",
+    "project_id": "keepnotesflutter-41cf8",
+    "storage_bucket": "keepnotesflutter-41cf8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453552072603:android:39767e3f99c8dae94d633e",
+        "android_client_info": {
+          "package_name": "com.practice.googlekeep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453552072603-j2gh3m0etstc3kdofa890a8j00mu3blg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.practice.googlekeep",
+            "certificate_hash": "9977023bac0f4198ec77ae6b1fb1bfe6a444c4a4"
+          }
+        },
+        {
+          "client_id": "453552072603-v41ouukpa1kmj1dq937kjk74lad8hm6i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW36nie8g0ZNsRr7ru78thYOq7NPrHbb0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453552072603-v41ouukpa1kmj1dq937kjk74lad8hm6i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
