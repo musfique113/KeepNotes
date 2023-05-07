@@ -15,6 +15,7 @@ class CreateNoteView extends StatefulWidget {
 class _CreateNoteViewState extends State<CreateNoteView> {
   TextEditingController title = new TextEditingController();
   TextEditingController content = new TextEditingController();
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -22,6 +23,7 @@ class _CreateNoteViewState extends State<CreateNoteView> {
     title.dispose();
     content.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +33,14 @@ class _CreateNoteViewState extends State<CreateNoteView> {
         elevation: 0.0,
         actions: [
           IconButton(
-              onPressed: () async{
-                await NotesDatabse.instance.InsertEntry(Note(title: title.text,content: content.text,pin: false,createdTime: DateTime.now()));
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+              onPressed: () async {
+                await NotesDatabse.instance.InsertEntry(Note(
+                    title: title.text,
+                    content: content.text,
+                    pin: false,
+                    createdTime: DateTime.now()));
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => Home()));
               },
               splashRadius: 17,
               icon: Icon(Icons.save_outlined))

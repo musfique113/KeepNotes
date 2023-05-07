@@ -71,11 +71,11 @@ class NotesDatabse {
         where: '${NotesImpNames.id} = ?', whereArgs: [note.id]);
   }
 
-  Future delteNote(Note note) async {
+  Future delteNote(Note? note) async {
     final db = await instance.database;
 
     await db!.delete(NotesImpNames.TableName,
-        where: '${NotesImpNames.id}= ?', whereArgs: [note.id]);
+        where: '${NotesImpNames.id}= ?', whereArgs: [note!.id]);
   }
 
   Future<List<int>> getNoteString(String query) async {

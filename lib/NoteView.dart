@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:googlekeep/EditNoteView.dart';
 import 'package:googlekeep/colors.dart';
+import 'package:googlekeep/home.dart';
 import 'package:googlekeep/model/MyNoteModel.dart';
+import 'package:googlekeep/services/db.dart';
 
 class NoteView extends StatefulWidget {
   Note note;
@@ -22,20 +24,31 @@ class _NoteViewState extends State<NoteView> {
         backgroundColor: bgColor,
         elevation: 0.0,
         actions: [
+          //pin
           IconButton(
               onPressed: () {},
               splashRadius: 18,
               icon: Icon(Icons.push_pin_outlined)),
+          //archived
           IconButton(
               onPressed: () {},
               splashRadius: 18,
               icon: Icon(Icons.archive_outlined)),
+          //edit
           IconButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => EditNoteView(note: widget.note)));
               },
               splashRadius: 18,
-              icon: Icon(Icons.edit_outlined))
+              icon: Icon(Icons.edit_outlined)),
+          //delete
+          IconButton(
+              onPressed: () async{
+                await NotesDatabse.instance.delteNote(widget.note);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+              },
+              splashRadius: 18,
+              icon: Icon(Icons.delete_outline_outlined))
         ],
       ),
       body: Container(
