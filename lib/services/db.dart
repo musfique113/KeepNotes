@@ -78,6 +78,25 @@ class NotesDatabse {
         where: '${NotesImpNames.id}= ?', whereArgs: [note.id]);
   }
 
+  Future<List<int>> getNoteString(String query) async {
+    final db = await instance.database;
+    if (db == null) {
+      // Handle the case where the database is null
+      return [];
+    }
+
+    final result = await db.query(NotesImpNames.TableName);
+    List<int> resultIds = [];
+    result.forEach((element) {
+      if (element["title"].toString().toLowerCase().contains(query) ||
+          element["content"].toString().toLowerCase().contains(query)) {
+        resultIds.add(element["id"] as int);
+      }
+    });
+
+    return resultIds;
+  }
+
   Future closeDB() async {
     final db = await instance.database;
     db!.close();
