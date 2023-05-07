@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:googlekeep/ArchiveView.dart';
 import 'package:googlekeep/EditNoteView.dart';
 import 'package:googlekeep/colors.dart';
 import 'package:googlekeep/home.dart';
@@ -14,13 +15,6 @@ class NoteView extends StatefulWidget {
 }
 
 class _NoteViewState extends State<NoteView> {
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    print(widget.note!.pin);
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +35,11 @@ class _NoteViewState extends State<NoteView> {
           //archived
           IconButton(
               onPressed: () async{
-
+                await NotesDatabse.instance.aechivedNote(widget.note);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
               },
               splashRadius: 18,
-              icon: Icon(Icons.archive_outlined)),
+              icon: Icon(widget.note!.isArchived ? Icons.archive : Icons.archive_outlined)),
           //edit
           IconButton(
               onPressed: () {

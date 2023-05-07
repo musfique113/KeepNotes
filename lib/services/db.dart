@@ -30,6 +30,7 @@ class NotesDatabse {
     CREATE TABLE Notes(
       ${NotesImpNames.id} $idType,
       ${NotesImpNames.pin} $boolType,
+      ${NotesImpNames.isArchived} $boolType,
       ${NotesImpNames.title} $textType,
       ${NotesImpNames.content} $textType,
       ${NotesImpNames.createdTime} $textType
@@ -66,6 +67,12 @@ class NotesDatabse {
   Future pinNote(Note? note) async {
     final db = await instance.database;
     await db!.update(NotesImpNames.TableName, {NotesImpNames.pin : !note!.pin ? 1 : 0},
+        where: '${NotesImpNames.id} = ?', whereArgs: [note!.id]);
+  }
+
+  Future aechivedNote(Note? note) async {
+    final db = await instance.database;
+    await db!.update(NotesImpNames.TableName, {NotesImpNames.isArchived : !note!.isArchived ? 1 : 0},
         where: '${NotesImpNames.id} = ?', whereArgs: [note!.id]);
   }
 
