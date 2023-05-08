@@ -1,5 +1,4 @@
 # KeepNotes
-[![wakatime](https://wakatime.com/badge/user/18368562-fe00-4dd1-a78f-9403210fea47/project/99855e80-d3ff-4801-9b89-fd6a5f9b769c.svg)](https://wakatime.com/@musfique113/projects/agzhdhdxgy?start=2023-05-01&end=2023-05-08)
 
 KeepNotes is a simple and intuitive note-taking app that provides users with a range of useful features. Built using Flutter and Firebase, the app is fast and responsive, with a clean and modern design. KeepNotes allows users to save notes locally and in the cloud, sign in with their Google account, and easily manage their notes with features like pinning and archiving.
 
@@ -7,11 +6,19 @@ This is a practice project that I created by following a tutorial from [YouTube]
 
 ## Features
 
-- Sign in with Google
+- Sign in with Google using the profile picture button
 - Local and Cloud Storage
 - Pin Notes
 - Archive Notes
 - Add, Arrange, Delete, and Update Notes
+- Toast message notification for sign-in/sign-out events
+- Sync button for remote note storage (turned off by default)
+
+## Some changes
+
+In the latest version of KeepNotes, I have removed the home page and moved the sign-in functionality into the profile picture button. This means that users can sign in by tapping on their profile picture, or sign out if they are already signed in. A toast message will be displayed to notify the user about the sign-in/sign-out event.
+
+Additionally, the sync button for remote note storage is turned off by default
 
 ## Technologies Used
 
@@ -44,14 +51,4 @@ To get started with KeepNotes, follow these steps:
 3. Update the Firebase configuration in `lib/main.dart`.
 4. Run the app on your device or emulator.
 
-## Screenshots
 
-![Screenshot 1](screenshots/screenshot_1.png) ![Screenshot 2](screenshots/screenshot_2.png)
-
-## Contributing
-
-Contributions to KeepNotes are always welcome! If you find a bug or have an idea for a new feature, please create an issue on the GitHub repository. Pull requests are also welcome.
-
-## License
-
-KeepNotes is released under the [MIT License](LICENSE).
