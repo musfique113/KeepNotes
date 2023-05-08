@@ -5,6 +5,7 @@ import 'package:googlekeep/colors.dart';
 import 'package:googlekeep/home.dart';
 import 'package:googlekeep/model/MyNoteModel.dart';
 import 'package:googlekeep/services/db.dart';
+import 'package:intl/intl.dart';
 
 class NoteView extends StatefulWidget {
   Note note;
@@ -64,6 +65,8 @@ class _NoteViewState extends State<NoteView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text("Created On ${DateFormat("dd-MM-yyyy - h:mm a").format(widget.note!.createdTime)}",style: TextStyle(color: Colors.white,fontSize: 11,fontStyle: FontStyle.italic),),
+              SizedBox(height: 10,),
               Text(widget.note.title ,style: TextStyle(color: Colors.white,fontSize: 23,fontWeight: FontWeight.bold),),
               SizedBox(height: 10,),
               Text(widget.note.content,style: TextStyle(color: Colors.white),),

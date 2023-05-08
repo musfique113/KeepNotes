@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:googlekeep/colors.dart';
+import 'package:googlekeep/login_info.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -9,9 +10,20 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  bool value = true;
-
+  late bool value;
+  getSyncSet() async{
+    LocalDataSaver.getSyncSet().then((valueFromDB){
+      setState(() {
+        value = valueFromDB!;
+      });
+    });
+  }
   @override
+  void initState() {
+    getSyncSet();
+    // TODO: implement initState
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
@@ -35,6 +47,7 @@ class _SettingsState extends State<Settings> {
                       onChanged: (switchValue) {
                         setState(() {
                           this.value = switchValue;
+                          LocalDataSaver.saveSyncSet(switchValue);
                         });
                       }),
                 ),
