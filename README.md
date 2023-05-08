@@ -46,7 +46,12 @@ To get started with KeepNotes, follow these steps:
 
 ## Screenshots
 
-![Screenshot 1](screenshots/screenshot_1.png) ![Screenshot 2](screenshots/screenshot_2.png)
+<img src="https://user-images.githubusercontent.com/53111065/236906739-dfd4cb34-d846-43b3-b91f-17e2f6d29787.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906745-0c8b25ee-8df5-4852-b65a-6e15e189f8dc.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906751-f4239e9a-114e-4a41-8172-55a7075a02ab.jpeg" width="200" height="400">
+
+<img src="https://user-images.githubusercontent.com/53111065/236906756-30fa462f-7f08-4ce0-93ac-855484d69687.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906759-d34ac657-6836-41d7-8040-b9e0df6f83ed.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906762-46892eea-fc30-4d6d-8d6d-269411781887.jpeg" width="200" height="400">
+
+<img src="https://user-images.githubusercontent.com/53111065/236906768-95d851a5-0e42-4048-9188-04eaee93aa65.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906770-7c8daeee-2e58-4616-a1a6-2a3910de6942.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906772-1c396300-8183-4898-bbcc-4f7b23a8d00a.jpeg" width="200" height="400">
+
 
 ## Contributing
 
