@@ -25,6 +25,7 @@ class _HomeState extends State<Home> {
   bool isLoading = true;
   late List<Note> notesList;
   late String? ImgUrl;
+  bool isStaggered = true;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   String note =
       "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE";
@@ -157,8 +158,7 @@ class _HomeState extends State<Home> {
                                           height: 55,
                                           width: MediaQuery.of(context)
                                                   .size
-                                                  .width -
-                                              220,
+                                                  .width/3,
                                           child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -191,9 +191,14 @@ class _HomeState extends State<Home> {
                                                 borderRadius:
                                                     BorderRadius.circular(50.0),
                                               ))),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            setState(() {
+                                              isStaggered = !isStaggered ;
+                                            });
+                                          },
                                           child: Icon(
-                                            Icons.grid_view,
+                                            isStaggered! ? Icons.list : Icons.grid_view,
+                                            //Icons.grid_view,
                                             color: white,
                                           )),
                                       SizedBox(
@@ -224,8 +229,8 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ])),
-                      NoteSectionAll(),
-                     // NotesListSection()
+                      isStaggered ?  NoteSectionAll() :
+                      NotesListSection()
                     ],
                   ),
                 ),
@@ -313,7 +318,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "LIST VIEW",
+                "ALL",
                 style: TextStyle(
                     color: white.withOpacity(0.5),
                     fontSize: 13,
@@ -330,7 +335,7 @@ class _HomeState extends State<Home> {
             child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 10,
+              itemCount: notesList.length,
               itemBuilder: (context, index) => Container(
                 padding: EdgeInsets.all(10),
                 margin: EdgeInsets.only(bottom: 10),
@@ -340,7 +345,7 @@ class _HomeState extends State<Home> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("HEADING",
+                    Text(notesList[index].title,
                         style: TextStyle(
                             color: white,
                             fontSize: 20,
@@ -349,11 +354,9 @@ class _HomeState extends State<Home> {
                       height: 10,
                     ),
                     Text(
-                      index.isEven
-                          ? note.length > 250
-                              ? "${note.substring(0, 250)}..."
-                              : note
-                          : note1,
+                      notesList[index].content.length > 250
+                          ? "${notesList[index].content.substring(0, 250)}..."
+                          : notesList[index].content,
                       style: TextStyle(color: white),
                     )
                   ],

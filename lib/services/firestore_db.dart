@@ -58,7 +58,7 @@ class FireDB {
         .doc(current_user!.email)
         .collection("usernotes")
         .doc(note.uniqueID.toString())
-        .update({"title": note.title.toString(), "content": note.content}).then(
+        .update({"Title": note.title.toString(), "content": note.content}).then(
             (_) {
       print("DATA ADDED SUCCESFULLY");
     });

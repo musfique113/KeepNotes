@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:googlekeep/NoteView.dart';
 import 'package:googlekeep/colors.dart';
 import 'package:googlekeep/services/db.dart';
-
 import 'home.dart';
 import 'model/MyNoteModel.dart';
 
