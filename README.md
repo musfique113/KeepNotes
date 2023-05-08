@@ -13,6 +13,12 @@ This is a practice project that I created by following a tutorial from [YouTube]
 - Archive Notes
 - Add, Arrange, Delete, and Update Notes
 
+## Some changes
+
+In the latest version of KeepNotes, I have removed the home page and moved the sign-in functionality into the profile picture button. This means that users can sign in by tapping on their profile picture, or sign out if they are already signed in. A toast message will be displayed to notify the user about the sign-in/sign-out event.
+
+Additionally, the sync button for remote note storage is turned off by default
+
 ## Technologies Used
 
 KeepNotes uses the following packages to provide its functionality:
