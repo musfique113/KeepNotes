@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     getAllNotes();
-    LocalDataSaver.saveSyncSet(false);
+    //LocalDataSaver.saveSyncSet(true);
   }
 
   Future createEntry(Note note) async {
