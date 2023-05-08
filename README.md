@@ -63,6 +63,3 @@ To get started with KeepNotes, follow these steps:
 
 Contributions to KeepNotes are always welcome! If you find a bug or have an idea for a new feature, please create an issue on the GitHub repository. Pull requests are also welcome.
 
-## License
-
-KeepNotes is released under the [MIT License](LICENSE).
