@@ -8,16 +8,17 @@ class FireDB {
   //CREATE,READ,UPDATE,DELETE
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  createNewNoteFirestore(Note note) async {
+  createNewNoteFirestore(Note note ) async {
     final User? current_user = _auth.currentUser;
     await FirebaseFirestore.instance
         .collection("notes")
         .doc(current_user!.email)
         .collection("usernotes")
-        .doc(note.id.toString())
+        .doc(note.uniqueID)
         .set({
       "Title": note.title,
       "content": note.content,
+      "uniqueID" : note.uniqueID,
       "date": note.createdTime,
       // "Title": "New test title",
       //  "content": "test notes",
@@ -37,15 +38,15 @@ class FireDB {
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
-
-
         Map note = result.data();
         NotesDatabse.instance.InsertEntry(Note(
             title: note["Title"],
+            uniqueID: note["uniqueID"],
             content: note["content"],
             createdTime: note["date"],
             pin: false,
-            isArchived: false)); //Add Notes In Database
+            isArchived: false
+            )); //Add Notes In Database
       });
     });
   }
@@ -56,7 +57,7 @@ class FireDB {
         .collection("notes")
         .doc(current_user!.email)
         .collection("usernotes")
-        .doc(note.id.toString())
+        .doc(note.uniqueID.toString())
         .update({"title": note.title.toString(), "content": note.content}).then(
             (_) {
       print("DATA ADDED SUCCESFULLY");
@@ -69,7 +70,7 @@ class FireDB {
         .collection("notes")
         .doc(current_user!.email.toString())
         .collection("usernotes")
-        .doc(note.id.toString())
+        .doc(note.uniqueID.toString())
         .delete()
         .then((_) {
       print("DATA DELETED SUCCESS FULLY");

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:googlekeep/colors.dart';
 import 'package:googlekeep/home.dart';
 import 'package:googlekeep/services/db.dart';
+import 'package:uuid/uuid.dart';
 
 import 'model/MyNoteModel.dart';
 
 class CreateNoteView extends StatefulWidget {
   const CreateNoteView({Key? key}) : super(key: key);
-
   @override
   State<CreateNoteView> createState() => _CreateNoteViewState();
 }
@@ -15,6 +15,7 @@ class CreateNoteView extends StatefulWidget {
 class _CreateNoteViewState extends State<CreateNoteView> {
   TextEditingController title = new TextEditingController();
   TextEditingController content = new TextEditingController();
+  var uuid = Uuid();
 
   @override
   void dispose() {
@@ -36,6 +37,7 @@ class _CreateNoteViewState extends State<CreateNoteView> {
               onPressed: () async {
                 await NotesDatabse.instance.InsertEntry(Note(
                     title: title.text,
+                    uniqueID: uuid.v1(),
                     content: content.text,
                     pin: false,
                     isArchived: false,

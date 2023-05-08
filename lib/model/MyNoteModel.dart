@@ -1,5 +1,6 @@
 class NotesImpNames {
   static final String id = "id";
+  static final String uniqueID = "uniqueID";
   static final String pin = "pin";
   static final String title = "title";
   static final String content = "content";
@@ -14,6 +15,7 @@ class Note {
   final bool pin;
   final bool isArchived;
   final String title;
+  final String uniqueID;
   final String content;
   final DateTime createdTime;
 
@@ -22,6 +24,7 @@ class Note {
     required this.pin,
     required this.isArchived,
     required this.title,
+    required this.uniqueID,
     required this.content,
     required this.createdTime,
   });
@@ -31,6 +34,7 @@ class Note {
     bool? pin,
     bool? isArchived,
     String? title,
+    String? uniqueID,
     String? content,
     DateTime? createdTime,
   }) {
@@ -40,6 +44,7 @@ class Note {
         isArchived: isArchived ?? this.isArchived,
         title: title ?? this.title,
         content: content ?? this.content,
+        uniqueID: uniqueID ?? this.uniqueID,
         createdTime: createdTime ?? this.createdTime);
   }
 
@@ -49,6 +54,7 @@ class Note {
         pin: json[NotesImpNames.pin] == 1,
         isArchived: json[NotesImpNames.isArchived] == 1,
         title: json[NotesImpNames.title] as String,
+        uniqueID: json[NotesImpNames.uniqueID] as String,
         content: json[NotesImpNames.content] as String,
         createdTime: DateTime.parse(json[NotesImpNames.createdTime] as String));
   }
@@ -59,6 +65,7 @@ class Note {
       NotesImpNames.pin: pin ? 1 : 0,
       NotesImpNames.isArchived: isArchived ? 1 : 0,
       NotesImpNames.title: title,
+      NotesImpNames.uniqueID: uniqueID,
       NotesImpNames.content: content,
       NotesImpNames.createdTime: createdTime.toIso8601String()
     };
