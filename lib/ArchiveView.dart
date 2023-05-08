@@ -205,27 +205,6 @@ class _ArchiveViewState extends State<ArchiveView> {
                                       SizedBox(
                                         width: 9,
                                       ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          signOut();
-                                          LocalDataSaver.saveLoginData(false);
-
-                                          Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Login()));
-                                        },
-                                        child: CircleAvatar(
-                                          onBackgroundImageError:
-                                              (Object, StackTrace) {
-                                            print("Ok");
-                                          },
-                                          radius: 16,
-                                          backgroundImage:
-                                          NetworkImage(ImgUrl.toString()),
-                                        ),
-                                      )
                                     ],
                                   ),
                                 ),

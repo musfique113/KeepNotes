@@ -38,11 +38,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'KeepNotes',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: isLogIn ? Login() : Home(),
+      // home: isLogIn ? Login() : Home(),
+      home: Home(),
     );
   }
 }
