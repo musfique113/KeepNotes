@@ -20,6 +20,12 @@ In the latest version of KeepNotes, I have removed the home page and moved the s
 
 Additionally, the sync button for remote note storage is turned off by default
 
+## Some changes
+
+In the latest version of KeepNotes, I have removed the home page and moved the sign-in functionality into the profile picture button. This means that users can sign in by tapping on their profile picture, or sign out if they are already signed in. A toast message will be displayed to notify the user about the sign-in/sign-out event.
+
+Additionally, the sync button for remote note storage is turned off by default
+
 ## Technologies Used
 
 KeepNotes uses the following packages to provide its functionality:
@@ -52,3 +58,20 @@ To get started with KeepNotes, follow these steps:
 4. Run the app on your device or emulator.
 
 
+<<<<<<< HEAD
+=======
+<img src="https://user-images.githubusercontent.com/53111065/236906739-dfd4cb34-d846-43b3-b91f-17e2f6d29787.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906745-0c8b25ee-8df5-4852-b65a-6e15e189f8dc.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906751-f4239e9a-114e-4a41-8172-55a7075a02ab.jpeg" width="200" height="400">
+
+<img src="https://user-images.githubusercontent.com/53111065/236906756-30fa462f-7f08-4ce0-93ac-855484d69687.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906759-d34ac657-6836-41d7-8040-b9e0df6f83ed.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906762-46892eea-fc30-4d6d-8d6d-269411781887.jpeg" width="200" height="400">
+
+<img src="https://user-images.githubusercontent.com/53111065/236906768-95d851a5-0e42-4048-9188-04eaee93aa65.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906770-7c8daeee-2e58-4616-a1a6-2a3910de6942.jpeg" width="200" height="400"> <img src="https://user-images.githubusercontent.com/53111065/236906772-1c396300-8183-4898-bbcc-4f7b23a8d00a.jpeg" width="200" height="400">
+
+
+## Contributing
+
+Contributions to KeepNotes are always welcome! If you find a bug or have an idea for a new feature, please create an issue on the GitHub repository. Pull requests are also welcome.
+
+## License
+
+KeepNotes is released under the [MIT License](LICENSE).
+>>>>>>> 2d61635ce2b2b379aca1ecd9fe6a021b79fecc0b
